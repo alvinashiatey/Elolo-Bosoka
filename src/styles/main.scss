@@ -1,11 +1,11 @@
+@import "./reset/reset.scss";
 @import "./components/variables.scss";
 @import "./components/slider.scss";
 @import "./components/navigator.scss";
 
 @font-face {
-  font-family: "MyWebFont";
-  src: url("Gerstner Programm"); /* IE9 Compat Modes */
-  src: url("Gerstner Programm Regular.otf") format("pentype");
+  font-family: "Gerstner Programm";
+  src: url("../assets/font/Gerstner\ Programm\ Regular.otf") format("pentype");
 }
 
 body {

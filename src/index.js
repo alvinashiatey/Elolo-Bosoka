@@ -1,4 +1,3 @@
-import "./styles/reset/reset.scss";
 import "./styles/main.scss";
 import gsap from "gsap";
 

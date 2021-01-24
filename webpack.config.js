@@ -1,10 +1,8 @@
 const path = require("path");
 const htmlWebPackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-var OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
-const ServiceWorkerWebpackPlugin = require("serviceworker-webpack-plugin");
 
 module.exports = {
   entry: "./src/index.js",
@@ -16,7 +14,7 @@ module.exports = {
     contentBase: "./dist/",
   },
   optimization: {
-    minimizer: [new OptimizeCssAssetsPlugin(), new TerserPlugin()],
+    minimizer: [new TerserPlugin()],
   },
   plugins: [
     new htmlWebPackPlugin({
@@ -45,7 +43,13 @@ module.exports = {
       {
         test: /\.s?[ac]ss$/i,
         use: [
-          MiniCssExtractPlugin.loader,
+          {
+            loader: "style-loader",
+            options: {
+              insert: "head", // insert style tag inside of <head>
+              injectType: "singletonStyleTag", // this is for wrap all your style in just one style tag
+            },
+          },
           "css-loader",
           "resolve-url-loader",
           "sass-loader",
