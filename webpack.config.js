@@ -28,18 +28,10 @@ module.exports = {
     }),
     new CopyPlugin([
       {
-        from: "./src/manifest.json",
-        to: "./manifest.json",
-        toType: "file",
-      },
-      {
         from: "./src/assets/",
         to: "./assets/",
       },
     ]),
-    new ServiceWorkerWebpackPlugin({
-      entry: path.join(__dirname, "src/sw.js"),
-    }),
   ],
   module: {
     rules: [
@@ -52,14 +44,19 @@ module.exports = {
       },
       {
         test: /\.s?[ac]ss$/i,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+        use: [
+          MiniCssExtractPlugin.loader,
+          "css-loader",
+          "resolve-url-loader",
+          "sass-loader",
+        ],
       },
       {
         test: /\.svg$/,
         loader: "svg-inline-loader",
       },
       {
-        test: /\.(png|jpe?g|gif|mp3)$/i,
+        test: /\.(png|jpe?g|gif|otf)$/i,
         use: [
           {
             loader: "file-loader",
