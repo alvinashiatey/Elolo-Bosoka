@@ -20,7 +20,8 @@ let revealAboutUs = (div1, dur1) => {
 };
 
 let hideAboutUs = (div1, dur1) => {
-  gsap.to(div1, dur1, {
+  gsap.to(div1, {
+    duration: dur1,
     x: -300,
     ease: "power3.inOut",
   });

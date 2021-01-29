@@ -1,9 +1,38 @@
 .home__slider {
-  width: 150em;
-  height: 150em;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  width: 100vw;
+  height: 100vh;
+  bottom: 0%;
+  top: 0;
+  right: 0;
+  bottom: 0;
   position: absolute;
-  background-color: tomato;
+  background-color: #181818;
+  z-index: -20;
+  .image__container {
+    margin: 0 auto;
+    padding: 0;
+    width: inherit;
+    height: inherit;
+    .gallery__container {
+      width: inherit;
+      height: inherit;
+      display: flex;
+      opacity: 0.5;
+    }
+
+    .overlay__effect {
+      width: inherit;
+      height: inherit;
+      position: absolute;
+      z-index: -5;
+      top: 0;
+      .pixelate {
+        filter: url("#pixelate");
+      }
+    }
+    img {
+      width: 100vw;
+      object-fit: cover;
+    }
+  }
 }

@@ -2,13 +2,32 @@ import "./styles/main.scss";
 import gsap from "gsap";
 
 const apiCall = async () => {
-  const channel = "bryant-wells-eeaqnoam1yc";
+  const channel = "portfolio-udgybnlrh2o";
   const makeURL = (page, per) =>
     `https://api.are.na/v2/channels/${channel}?page=${page}&amp;per=${per}`;
 
   fetch(makeURL(1, 100))
-    .then((res) => res.join())
-    .then((json) => console.log(json));
+    .then((res) => res.json())
+    .then((json) => {
+      const galleryContainer = document.getElementById("g_container");
+      const about = document.getElementById("about");
+
+      const contentArr = json.contents;
+      console.log(contentArr);
+
+      for (const content of contentArr) {
+        if (content.image == null) {
+          if (content.title == "About") {
+            about.innerHTML = content.content_html;
+          }
+        } else {
+          let newImg = document.createElement("img");
+          newImg.src = content.image.original.url;
+          newImg.setAttribute("data-active", false);
+          galleryContainer.insertAdjacentElement("beforeend", newImg);
+        }
+      }
+    });
 
   // const data = axios
   //   .get(makeURL(1, 100))
@@ -73,3 +92,30 @@ const apiCall = async () => {
 
   // return data;
 };
+
+apiCall();
+
+function pixelate() {
+  const filter = document.querySelector("#pixelate");
+  const pixelFilterSize = filter.querySelector("#size");
+  const homeLinks = document.querySelectorAll(".home_links");
+
+  let tinyPixels = gsap.timeline({ paused: true }).to(pixelFilterSize, {
+    duration: 1,
+    attr: {
+      radius: 0,
+    },
+    ease: "power3.inOut",
+  });
+
+  homeLinks.forEach((el) => {
+    el.addEventListener("mouseover", () => {
+      tinyPixels.play();
+    });
+    el.addEventListener("mouseleave", () => {
+      tinyPixels.reverse();
+    });
+  });
+}
+
+pixelate();

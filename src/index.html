@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
-    <title>we.need.to.talk</title>
+    <title>Elolo Bosoka</title>
     <meta charset="utf-8" />
     <meta
       name="description"
@@ -15,23 +15,60 @@
       <div class="navigator">
         <header>
           <div class="page_title">
-            <a href="">Elolo Bosoka</a>
+            <a class="home_links" href="">Elolo Bosoka</a>
           </div>
           <div class="about">
-            <a href="">About</a>
+            <a class="home_links" href="">About</a>
           </div>
         </header>
         <footer>
           <div class="contact">
-            <a href="">Contact</a>
+            <a class="home_links" href="">Contact</a>
           </div>
           <div class="index">
-            <a href="">Index</a>
+            <a class="home_links" href="">Index</a>
           </div>
         </footer>
       </div>
       <div class="home__slider">
-        <div class="image__container"></div>
+        <div class="image__container">
+          <div class="gallery__container" id="g_container">
+            <img
+              id="activeImage"
+              src="./assets/img/Shape diagram series 2017..jpg"
+              alt=""
+              data-active="true"
+            />
+          </div>
+
+          <div class="overlay__effect hidden">
+            <img
+              class="pixelate"
+              id="activeImage"
+              src="./assets/img/Shape diagram series 2017..jpg"
+              alt=""
+            />
+            <!-- filters -->
+            <svg style="visibility: hidden">
+              <defs>
+                <filter id="pixelate">
+                  <feFlood x="0" y="0" height="1" width="1" />
+                  <feComposite id="spacing" width="20" height="20" />
+                  <feTile result="a" />
+                  <feComposite in="SourceGraphic" in2="a" operator="in" />
+                  <feMorphology id="size" operator="dilate" radius="6" />
+                </filter>
+              </defs>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="text__containter hidden">
+        <div class="text__content">
+          <div id="about"></div>
+          <div id="contact"></div>
+          <div id="index"></div>
+        </div>
       </div>
     </div>
   </body>
