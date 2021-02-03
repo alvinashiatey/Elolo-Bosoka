@@ -31,13 +31,13 @@ export default class Slider {
       if (counter <= numberOfSlides) {
         counter++;
         this.sliderContainer.transition = "transform 3000ms ease-in-out";
-        this.sliderContainer.style.transform = `translateX(${
+        this.sliderContainer.style.transform = `translate3d(${
           -size * counter
-        }px)`;
+        }px, 0,0)`;
         setTimeout(slide, 3000);
       } else {
         counter = 0;
-        this.sliderContainer.style.transform = `translateX(${-size}px)`;
+        this.sliderContainer.style.transform = `translate3d(${-size}px, 0, 0)`;
         slide();
       }
     };
