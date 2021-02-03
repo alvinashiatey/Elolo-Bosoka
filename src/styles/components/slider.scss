@@ -18,6 +18,10 @@
       height: inherit;
       display: flex;
       opacity: 0.5;
+      .img__holder {
+        height: inherit;
+        width: inherit;
+      }
     }
 
     .overlay__effect {
@@ -32,6 +36,7 @@
     }
     img {
       width: 100vw;
+      height: 100vh;
       object-fit: cover;
     }
   }
