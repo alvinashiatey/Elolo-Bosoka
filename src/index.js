@@ -33,7 +33,7 @@ const apiCall = async () => {
       }
     });
   let el = document.querySelector(".image__container");
-  let slide = new Slider({ element: el, numberOfSlides: 36 });
+  let slide = new Slider({ element: el, numberOfSlides: 35, autoplay: false });
   slide.printWidth();
 };
 
@@ -63,3 +63,14 @@ function pixelate() {
 }
 
 pixelate();
+
+function mouseEffect() {
+  const mouseDiv = document.getElementById("overlay__cursor");
+  let moveMouseDiv = (e) => {
+    mouseDiv.style.clipPath = `circle(5em at ${e.clientX}px ${e.clientY}px)`;
+    mouseDiv.style.opacity = 1;
+  };
+  window.addEventListener("mousemove", moveMouseDiv);
+}
+
+mouseEffect();

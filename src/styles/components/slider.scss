@@ -11,27 +11,35 @@
   .image__container {
     margin: 0 auto;
     padding: 0;
-    width: inherit;
-    height: inherit;
+    width: 100vw;
+    height: 100vh;
     .gallery__container {
-      width: inherit;
-      height: inherit;
+      width: 100vw;
+      height: 100vh;
       display: flex;
       opacity: 0.5;
       .img__holder {
-        height: inherit;
-        width: inherit;
+        width: 100vw;
+        height: 100vh;
       }
     }
-
-    .overlay__effect {
+    #overlay__cursor {
       width: inherit;
       height: inherit;
-      position: absolute;
-      z-index: -5;
+      position: fixed;
       top: 0;
-      .pixelate {
-        filter: url("#pixelate");
+      clip-path: circle(5em at center center);
+      pointer-events: none;
+
+      .overlay__effect {
+        width: inherit;
+        height: inherit;
+        position: absolute;
+        z-index: 100;
+        top: 0;
+        .pixelate {
+          filter: url("#pixelate");
+        }
       }
     }
     img {

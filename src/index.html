@@ -42,25 +42,27 @@
               />
             </div>
           </div>
-          <div class="overlay__effect hidden">
-            <img
-              class="pixelate"
-              id="activeImage"
-              src="./assets/img/Shape diagram series 2017..jpg"
-              alt=""
-            />
-            <!-- filters -->
-            <svg style="visibility: hidden">
-              <defs>
-                <filter id="pixelate">
-                  <feFlood x="0" y="0" height="1" width="1" />
-                  <feComposite id="spacing" width="20" height="20" />
-                  <feTile result="a" />
-                  <feComposite in="SourceGraphic" in2="a" operator="in" />
-                  <feMorphology id="size" operator="dilate" radius="6" />
-                </filter>
-              </defs>
-            </svg>
+          <div id="overlay__cursor">
+            <div class="overlay__effect">
+              <img
+                class="pixelate"
+                id="activeImage"
+                src="./assets/img/Shape diagram series 2017..jpg"
+                alt=""
+              />
+              <!-- filters -->
+              <svg style="visibility: hidden">
+                <defs>
+                  <filter id="pixelate">
+                    <feFlood x="0" y="0" height="1" width="1" />
+                    <feComposite id="spacing" width="20" height="20" />
+                    <feTile result="a" />
+                    <feComposite in="SourceGraphic" in2="a" operator="in" />
+                    <feMorphology id="size" operator="dilate" radius="6" />
+                  </filter>
+                </defs>
+              </svg>
+            </div>
           </div>
         </div>
       </div>

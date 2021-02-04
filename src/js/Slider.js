@@ -1,46 +1,48 @@
 export default class Slider {
-  constructor({ element, numberOfSlides }) {
+  constructor({ element, numberOfSlides, autoplay = true }) {
     this.element = element;
     this.numberOfSlides = numberOfSlides;
-    this.sliderContainer;
-    for (const node of this.element.childNodes) {
-      if (node.id === "s_container") {
-        this.sliderContainer = node;
-      }
-    }
-    this.autoSlide();
+    this.sliderContainer = this.element.firstElementChild;
+    this.autoSlide(autoplay);
   }
 
   printWidth() {
-    console.log(this.element.clientWidth);
+    console.log(this.element.firstElementChild);
+    console.log(this.sliderContainer.offsetWidth);
+    console.log(this.sliderContainer.clientWidth);
   }
 
-  autoSlide() {
-    let counter = 0;
-    let size = this.sliderContainer.clientWidth;
-    window.addEventListener("resize", () => {
-      size = this.sliderContainer.clientWidth;
-    });
-
+  autoSlide(autoplay) {
+    let counter = -1;
+    let size = this.sliderContainer.offsetWidth;
     let numberOfSlides = this.numberOfSlides;
 
+    /* responsiveness */
+    window.addEventListener("resize", () => {
+      size = this.sliderContainer.clientWidth;
+      slideTransform();
+    });
+
+    let slideTransform = () => {
+      this.sliderContainer.style.transform = `translate3d(${
+        -size * counter
+      }px, 0,0)`;
+    };
+
     let slide = () => {
-      window.onresize = function (event) {
-        document.location.reload(true);
-      };
-      if (counter <= numberOfSlides) {
+      if (counter < numberOfSlides) {
         counter++;
-        this.sliderContainer.transition = "transform 3000ms ease-in-out";
-        this.sliderContainer.style.transform = `translate3d(${
-          -size * counter
-        }px, 0,0)`;
+        slideTransform();
         setTimeout(slide, 3000);
       } else {
-        counter = 0;
-        this.sliderContainer.style.transform = `translate3d(${-size}px, 0, 0)`;
+        counter = -1;
+        slideTransform();
         slide();
       }
     };
-    slide();
+
+    if (autoplay) {
+      slide();
+    }
   }
 }
