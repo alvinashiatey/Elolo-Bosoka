@@ -68,9 +68,9 @@ function mouseEffect() {
   const mouseDiv = document.getElementById("overlay__cursor");
   let moveMouseDiv = (e) => {
     if (
-      e.clientX >= mouseDiv.offsetWidth / 2 &&
+      e.clientX >= mouseDiv.offsetWidth / 2 - 200 &&
       e.clientX <= mouseDiv.offsetWidth / 2 + 200 &&
-      e.clientY >= mouseDiv.offsetHeight / 2 &&
+      e.clientY >= mouseDiv.offsetHeight / 2 - 200 &&
       e.clientY <= mouseDiv.offsetHeight / 2 + 200
     ) {
       mouseDiv.style.clipPath = `circle(60em at ${e.clientX}px ${e.clientY}px)`;
