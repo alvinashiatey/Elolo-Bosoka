@@ -2,6 +2,9 @@ import "./styles/main.scss";
 import Slider from "./js/Slider";
 import gsap from "gsap";
 
+let el = document.querySelector(".image__container");
+let slide = new Slider({ element: el, numberOfSlides: 35 });
+
 const apiCall = async () => {
   const channel = "portfolio-udgybnlrh2o";
   const makeURL = (page, per) =>
@@ -11,7 +14,7 @@ const apiCall = async () => {
     .then((res) => res.json())
     .then((json) => {
       const galleryContainer = document.getElementById("s_container");
-      const about = document.getElementById("about");
+      const about = document.getElementById("about-text");
 
       const contentArr = json.contents;
       console.log(contentArr);
@@ -32,9 +35,6 @@ const apiCall = async () => {
         }
       }
     });
-  let el = document.querySelector(".image__container");
-  let slide = new Slider({ element: el, numberOfSlides: 35, autoplay: false });
-  slide.printWidth();
 };
 
 apiCall();
@@ -67,10 +67,47 @@ pixelate();
 function mouseEffect() {
   const mouseDiv = document.getElementById("overlay__cursor");
   let moveMouseDiv = (e) => {
-    mouseDiv.style.clipPath = `circle(5em at ${e.clientX}px ${e.clientY}px)`;
-    mouseDiv.style.opacity = 1;
+    if (
+      e.clientX >= mouseDiv.offsetWidth / 2 &&
+      e.clientX <= mouseDiv.offsetWidth / 2 + 200 &&
+      e.clientY >= mouseDiv.offsetHeight / 2 &&
+      e.clientY <= mouseDiv.offsetHeight / 2 + 200
+    ) {
+      mouseDiv.style.clipPath = `circle(60em at ${e.clientX}px ${e.clientY}px)`;
+      mouseDiv.style.transition = `clip-path 0.1s ease`;
+    } else {
+      mouseDiv.style.transition = `none`;
+      mouseDiv.style.clipPath = `circle(5em at ${e.clientX}px ${e.clientY}px)`;
+      mouseDiv.style.opacity = 1;
+    }
   };
   window.addEventListener("mousemove", moveMouseDiv);
 }
 
 mouseEffect();
+
+function textDisplay() {
+  const aboutText = document.getElementById("about-text");
+  const indexText = document.getElementById("index-text");
+  const aboutBtn = document.getElementById("about-btn");
+  const indexBtn = document.getElementById("index-btn");
+
+  let aboutDisplay = () => {
+    aboutBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      aboutText.classList.contains("hidden") ? slide.pause() : slide.play();
+      aboutText.classList.toggle("hidden");
+      indexText.classList.add("hidden");
+    });
+  };
+  aboutDisplay();
+
+  let indexDisplay = () => {
+    indexBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      indexText.classList.toggle("hidden");
+      aboutText.classList.add("hidden");
+    });
+  };
+}
+textDisplay();

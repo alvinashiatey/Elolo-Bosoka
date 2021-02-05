@@ -3,19 +3,30 @@ export default class Slider {
     this.element = element;
     this.numberOfSlides = numberOfSlides;
     this.sliderContainer = this.element.firstElementChild;
-    this.autoSlide(autoplay);
+    this.autoplay = autoplay;
+    this.init();
+  }
+
+  init() {
+    this.autoSlide();
   }
 
   printWidth() {
-    console.log(this.element.firstElementChild);
-    console.log(this.sliderContainer.offsetWidth);
     console.log(this.sliderContainer.clientWidth);
   }
 
-  autoSlide(autoplay) {
+  play() {
+    this.autoplay = true;
+    console.log("play");
+  }
+
+  pause() {
+    this.autoplay = false;
+  }
+
+  autoSlide() {
     let counter = -1;
     let size = this.sliderContainer.offsetWidth;
-    let numberOfSlides = this.numberOfSlides;
 
     /* responsiveness */
     window.addEventListener("resize", () => {
@@ -27,12 +38,15 @@ export default class Slider {
       this.sliderContainer.style.transform = `translate3d(${
         -size * counter
       }px, 0,0)`;
+      // this.sliderContainer.style.transition = `0.7s`;
     };
 
     let slide = () => {
-      if (counter < numberOfSlides) {
-        counter++;
-        slideTransform();
+      if (counter < this.numberOfSlides) {
+        if (this.autoplay) {
+          counter++;
+          slideTransform();
+        }
         setTimeout(slide, 3000);
       } else {
         counter = -1;
@@ -40,9 +54,6 @@ export default class Slider {
         slide();
       }
     };
-
-    if (autoplay) {
-      slide();
-    }
+    slide();
   }
 }

@@ -8,6 +8,7 @@
   position: absolute;
   background-color: #181818;
   z-index: -20;
+
   .image__container {
     margin: 0 auto;
     padding: 0;
@@ -27,6 +28,7 @@
       width: inherit;
       height: inherit;
       position: fixed;
+      opacity: 0;
       top: 0;
       clip-path: circle(5em at center center);
       pointer-events: none;

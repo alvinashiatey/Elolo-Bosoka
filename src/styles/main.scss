@@ -9,6 +9,10 @@
   src: url("../assets/font/Gerstner\ Programm\ Regular.otf") format("pentype");
 }
 
+html {
+  cursor: none !important;
+}
+
 body {
   color: $color-primary;
   font-size: 62.5%;
